@@ -153,8 +153,22 @@ def all_students_tuple_list(filename):
     """
 
     student_list = []
-
+    student_information_tuple = ()
     # Code goes here
+    the_file = open(filename)
+
+    for line in the_file:
+
+        line = line.rstrip()
+        list_cohort_data = line.split("|")
+        if list_cohort_data[4] != "I" and list_cohort_data[4] != "G":
+            name = list_cohort_data[0] + " " + list_cohort_data[1]
+            house = list_cohort_data[2]
+            advisor = list_cohort_data[3]
+            cohort = list_cohort_data[4]
+            student_information_tuple = (name, house, advisor, cohort)
+            student_list.append(student_information_tuple)
+
 
     return student_list
 
@@ -181,7 +195,15 @@ def find_cohort_by_student_name(student_list):
 
     # Code goes here
 
-    return "Student not found."
+    name_question = ""
+
+    name_question = input("Who are you looking for? > ")
+
+    for index in range(0, len(student_list)+1):
+        if name_question in student_list[index][0]:
+            return ("{} was in the {} cohort".format(name_question, student_list[index][3]))
+        else:
+            return "Student not Found"
 
 
 ##########################################################################################
@@ -241,7 +263,8 @@ def find_house_members_by_student_name(student_list):
 #############################################################################
 # Here is some useful code to run these functions without doctests!
 
-# find_cohort_by_student_name(all_students_data)
+tuple_list = all_students_tuple_list("cohort_data.txt")
+print(find_cohort_by_student_name(tuple_list))
 # find_house_members_by_student_name(all_students_data)
 
 
@@ -251,9 +274,9 @@ def find_house_members_by_student_name(student_list):
 
 
 
-if __name__ == "__main__":
-    import doctest
+# if __name__ == "__main__":
+#     import doctest
 
-    result = doctest.testmod()
-    if result.failed == 0:
-        print("ALL TESTS PASSED")
+#     result = doctest.testmod()
+#     if result.failed == 0:
+#         print("ALL TESTS PASSED")
