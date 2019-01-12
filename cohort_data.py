@@ -220,9 +220,24 @@ def find_name_duplicates(filename):
 
     """
 
+
     duplicate_names = set()
+    last_names = []
 
     # Code goes here
+    the_file = open(filename)
+
+    for line in the_file:
+
+        line = line.rstrip()
+        list_cohort_data = line.split("|")
+        last_names.append(list_cohort_data[1])
+
+    initial_last_name = last_names[0]
+    for index in range(0, len(last_names)):
+        if last_names[index] is "initial_last_name":
+
+
 
     return duplicate_names
 
